@@ -1,5 +1,5 @@
 {
-    "name": "lru_cache",
+    "name": "lru-cache-js",
     "description": "A  module implementing an LRU cache factory",
     "main": "./lib/lru_cache",
     "author": {
@@ -28,6 +28,6 @@
     },
     "readme": "TBD",
     "readmeFilename": "README.md",
-    "_id": "lru_cache@0.1.0",
-    "_from": "lru_cache@"
+    "_id": "lru-cache-js@0.1.0",
+    "_from": "lru-cache-js@"
 }
