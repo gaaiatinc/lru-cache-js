@@ -1,0 +1,33 @@
+{
+    "name": "lru_cache",
+    "description": "A  module implementing an LRU cache factory",
+    "main": "./lib/lru_cache",
+    "author": {
+        "name": "MPP team @ PayPal"
+    },
+    "version": "0.1.0",
+    "repository": {
+        "type": "git",
+        "url": "https://github.paypal.com/MPP/LRUCache.git"
+    },
+    "bugs": {
+        "url": "TBD"
+    },
+    "licenses": [
+        {
+            "type": "MIT",
+            "url": "TBD"
+        }
+    ],
+    "devDependencies": {
+        "nodeunit": ">0.0.0"
+    },
+
+    "scripts": {
+        "test": "nodeunit test/test-lru_cache.js"
+    },
+    "readme": "TBD",
+    "readmeFilename": "README.md",
+    "_id": "lru_cache@0.1.0",
+    "_from": "lru_cache@"
+}
