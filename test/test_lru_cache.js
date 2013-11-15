@@ -4,17 +4,32 @@
 
 'use strict';
 
-var testMap = require('../lib/lru_cache')(100000);
+var LRUCache = require('../lib/lru_cache');
 
+var assert = require('assert');
 
+/**
+ *
+ * @param keyObj
+ * @constructor
+ */
 var TestKey = function (keyObj) {
     this.keyObj = keyObj;
 };
 
+/**
+ *
+ * @returns {string}
+ */
 TestKey.prototype.hashCode = function () {
     return this.keyObj.toString();
 };
 
+/**
+ *
+ * @param anotherKey
+ * @returns {boolean}
+ */
 TestKey.prototype.equals = function (anotherKey) {
     if (anotherKey && (typeof anotherKey.hashCode == 'function')) {
         return this.hashCode() == anotherKey.hashCode();
@@ -24,59 +39,86 @@ TestKey.prototype.equals = function (anotherKey) {
 };
 
 
-var startTime = new Date().getTime();
+/**
+ *
+ */
+describe('lru-cache-js', function () {
 
-var testKey = new TestKey('this is a test key!!!');
+    var testMap;
+    var cache_capacity = 100000;
 
-var testKey2 = new TestKey('this is a test key number 2!!!');
-
-testMap.put(testKey, "hello !!!!");
-testMap.put(testKey2, "hello number 2!!!!");
-
-console.log(testMap.get(testKey));
-console.log(testMap.get(testKey2));
-
-testMap.put(testKey, "hello number 1!!!!");
-console.log(testMap.get(testKey));
-console.log(testMap.get(testKey2));
-
-for (var i = 0; i < 1000000; i++) {
-    testKey = new TestKey('this is a test key number ' + i);
-    testMap.put(testKey, "hello value number " + i);
-
-    if ((i % 100) == 0) {
-        testKey = new TestKey('this is a test key number ' + 99);
-        testMap.get(testKey);
-    }
-}
-
-console.log('map size= ' + testMap.size());
+    before(function () {
+        //
+        testMap = LRUCache(cache_capacity);
+    });
 
 
-testKey = new TestKey('this is a test key number ' + 999990);
-console.log(testMap.get(testKey));
+    /**
+     *
+     */
+    after(function () {
+
+    });
+
+    /**
+     *
+     */
+    beforeEach(function () {
+
+    });
+
+    /**
+     *
+     */
+    afterEach(function () {
+
+    });
 
 
-testMap.put(testKey, "hello value number " + 224);
-console.log('map size= ' + testMap.size());
-console.log(testMap.get(testKey));
+    /**
+     *
+     */
+    describe('Performance test', function () {
 
-testKey = new TestKey('this is a test key number ' + 99);
-console.log(testMap.get(testKey));
+        it('should finish as fas as possible', function () {
 
-testKey = new TestKey('this is a test key number ' + 98);
-console.log(testMap.get(testKey));
+            var num_of_tests = 1000000;
 
-testKey = new TestKey('this is a test key number ' + 999000);
-console.log(testMap.get(testKey));
+            var testObj = 'this is a test key number ';
 
-console.log('map size= ' + testMap.size());
-testMap.remove(testKey);
-console.log(testMap.get(testKey));
-console.log('map size= ' + testMap.size());
+            var startTime = new Date().getTime();
 
-//console.log(testMap.mapHead);
+            var testKey;
 
-console.log('tests performed in ' + (new Date().getTime() - startTime) + " ms");
+            for (var i = 0; i < num_of_tests; i++) {
+                testKey = new TestKey(testObj + i);
+                testMap.put(testKey, testObj + i);
 
-console.log('finished');
+                if ((i % 100) == 0) {
+                    testKey = new TestKey(testObj + 99);
+                    testMap.get(testKey);
+                }
+            }
+
+            assert.equal(testMap.size(), cache_capacity, 'max cache capacity verification');
+
+
+            testKey = new TestKey(testObj + 999990);
+            assert.equal(testObj + 999990, testMap.get(testKey), 'verification of object retrieval after stress test');
+
+            testMap.put(testKey, testObj + 224);
+            assert.equal(testMap.get(testKey), testObj + 224, 'second verificaiton object retrieval after stress test');
+
+            testKey = new TestKey(testObj + 223);
+            assert.equal(testMap.get(testKey), null, 'verificaiton of old object eviction upon cache capacity exhaustion.');
+
+            testKey = new TestKey(testObj + 99);
+            assert.equal(testMap.get(testKey), testObj + 99, 'verification of LRU functionality');
+
+            testMap.remove(testKey);
+            console.log('tests performed in ' + (new Date().getTime() - startTime) + " ms");
+
+            assert.equal(testMap.size(), (cache_capacity - 1), 'end cache size verification!');
+        });
+    });
+});
