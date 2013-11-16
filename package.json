@@ -5,7 +5,7 @@
     "author": {
         "name": "MPP team @ PayPal"
     },
-    "version": "0.1.1",
+    "version": "0.2.0",
     "repository": {
         "type": "git",
         "url": "https://github.paypal.com/MPP/LRUCache.git"
@@ -28,6 +28,6 @@
     },
     "readme": "TBD",
     "readmeFilename": "README.md",
-    "_id": "lru-cache-js@0.1.0",
+    "_id": "lru-cache-js@0.2.0",
     "_from": "lru-cache-js@"
 }
