@@ -5,7 +5,7 @@
     "author": {
         "name": "MPP team @ PayPal"
     },
-    "version": "0.2.0",
+    "version": "0.3.0",
     "repository": {
         "type": "git",
         "url": "https://github.paypal.com/MPP/LRUCache.git"
@@ -19,15 +19,15 @@
             "url": "TBD"
         }
     ],
-    "devDependencies": {
-        "nodeunit": ">0.0.0"
-    },
-
+    "devDependencies": {},
     "scripts": {
         "test": "nodeunit test/test-lru_cache.js"
     },
     "readme": "TBD",
     "readmeFilename": "README.md",
-    "_id": "lru-cache-js@0.2.0",
-    "_from": "lru-cache-js@"
+    "_id": "lru-cache-js@0.3.0",
+    "_from": "lru-cache-js@",
+    "dependencies": {
+        "mocha": "~1.14.0"
+    }
 }

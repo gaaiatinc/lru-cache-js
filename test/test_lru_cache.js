@@ -46,10 +46,15 @@ describe('lru-cache-js', function () {
 
     var testMap;
     var cache_capacity = 100000;
+    var numOfEvictions = 0;
+
+    function evictionNotify(evicted) {
+        numOfEvictions++;
+    }
 
     before(function () {
         //
-        testMap = LRUCache(cache_capacity);
+        testMap = LRUCache(cache_capacity, evictionNotify);
     });
 
 
@@ -80,7 +85,7 @@ describe('lru-cache-js', function () {
      */
     describe('Performance test', function () {
 
-        it('should finish as fas as possible', function () {
+        it('should run without error', function () {
 
             var num_of_tests = 1000000;
 
@@ -118,6 +123,7 @@ describe('lru-cache-js', function () {
             testMap.remove(testKey);
             console.log('tests performed in ' + (new Date().getTime() - startTime) + " ms");
 
+            console.log('numOfEvictions = ' + numOfEvictions);
             assert.equal(testMap.size(), (cache_capacity - 1), 'end cache size verification!');
         });
     });
