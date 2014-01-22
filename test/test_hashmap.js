@@ -1,4 +1,5 @@
 /**
+ * See included License (MIT License).
  * Created by aismael on 11/12/13.
  */
 
@@ -48,7 +49,7 @@ describe('hashmap', function () {
 
     before(function () {
         //
-        testMap  = new HashMap();
+        testMap = new HashMap();
     });
 
 
@@ -105,22 +106,22 @@ describe('hashmap', function () {
                 testMap.put(testKey, "hello value number " + i);
             }
 
-            assert.equal( testMap.size(), test_cycles+2, 'verification of hashmap size after tests');
+            assert.equal(testMap.size(), test_cycles + 2, 'verification of hashmap size after tests');
 
             testKey = new TestKey('this is a test key number ' + 223);
 
             var testObj3 = "hello value number " + 224;
             testMap.put(testKey, testObj3);
-            assert.equal( testMap.size(), test_cycles+2, 'second verification of hashmap size after tests');
+            assert.equal(testMap.size(), test_cycles + 2, 'second verification of hashmap size after tests');
 
             assert.equal(testMap.get(testKey), testObj3, 'retrival of objects after stress test');
 
-            assert.equal( testMap.remove(testKey), testObj3, 'verification of object removal from cache');
+            assert.equal(testMap.remove(testKey), testObj3, 'verification of object removal from cache');
 
-            assert.equal( testMap.size(), test_cycles+1, 'verification of hashmap size after object removal');
+            assert.equal(testMap.size(), test_cycles + 1, 'verification of hashmap size after object removal');
 
             testMap.clear();
-            assert.equal( testMap.size(), 0, 'verification of hashmap size after clear');
+            assert.equal(testMap.size(), 0, 'verification of hashmap size after clear');
         });
     });
 });

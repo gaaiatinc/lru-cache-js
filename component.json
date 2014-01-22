@@ -1,6 +1,6 @@
 {
   "name": "lru-cache-js",
-  "repo": "https://github.paypal.com/MPP/lru-cache-js.git",
+  "repo": "https://github.com/gaaiatinc/lru-cache-js.git",
   "description": "A JavaScript Implementation of an LRU cache.",
   "version": "0.3.0",
   "keywords": [],

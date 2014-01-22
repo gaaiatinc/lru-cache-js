@@ -3,27 +3,27 @@
     "description": "A  module implementing an LRU cache factory",
     "main": "./lib/lru_cache",
     "author": {
-        "name": "MPP team @ PayPal"
+        "name": "Ali Ismael"
     },
     "version": "0.3.0",
     "repository": {
         "type": "git",
-        "url": "https://github.paypal.com/MPP/LRUCache.git"
+        "url": "https://github.com/gaaiatinc/lru-cache-js.git"
     },
     "bugs": {
-        "url": "TBD"
+        "url": "https://github.com/gaaiatinc/lru-cache-js.git"
     },
     "licenses": [
         {
             "type": "MIT",
-            "url": "TBD"
+            "url": "https://raw.github.com/gaaiatinc/lru-cache-js/master/LICENSE"
         }
     ],
     "devDependencies": {},
     "scripts": {
         "test": "nodeunit test/test-lru_cache.js"
     },
-    "readme": "TBD",
+    "readme": "https://raw.github.com/gaaiatinc/lru-cache-js/master/README.md",
     "readmeFilename": "README.md",
     "_id": "lru-cache-js@0.3.0",
     "_from": "lru-cache-js@",

@@ -1,4 +1,5 @@
 /**
+ * See included License (MIT License).
  * Created by aismael on 11/12/13.
  */
 
