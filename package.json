@@ -5,19 +5,22 @@
     "author": {
         "name": "Ali Ismael"
     },
-    "version": "0.4.0",
+    "version": "0.4.1",
     "repository": {
         "type": "git",
         "url": "https://github.com/gaaiatinc/lru-cache-js.git"
     },
+    "engines": {
+        "node": ">=0.10.0"
+    },
+    "license": "Apache-2.0",
     "bugs": {
         "url": "https://github.com/gaaiatinc/lru-cache-js.git"
     },
-    "licenses": [
-        {
-            "type": "MIT",
-            "url": "https://raw.github.com/gaaiatinc/lru-cache-js/master/LICENSE"
-        }
+    "homepage": "https://github.com/gaaiatinc/lru-cache-js",
+    "keywords": [
+        "lru",
+        "cache"
     ],
     "devDependencies": {},
     "scripts": {
@@ -25,8 +28,6 @@
     },
     "readme": "https://raw.github.com/gaaiatinc/lru-cache-js/master/README.md",
     "readmeFilename": "README.md",
-    "_id": "lru-cache-js@0.3.0",
-    "_from": "lru-cache-js@",
     "dependencies": {
         "mocha": "~1.14.0"
     }
