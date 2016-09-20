@@ -5,7 +5,7 @@
     "author": {
         "name": "Ali Ismael"
     },
-    "version": "0.4.1",
+    "version": "0.4.2",
     "repository": {
         "type": "git",
         "url": "https://github.com/gaaiatinc/lru-cache-js.git"
@@ -22,13 +22,13 @@
         "lru",
         "cache"
     ],
-    "devDependencies": {},
+    "devDependencies": {
+        "mocha": "^3.0.2"
+    },
     "scripts": {
         "test": "nodeunit test/test-lru_cache.js"
     },
     "readme": "https://raw.github.com/gaaiatinc/lru-cache-js/master/README.md",
     "readmeFilename": "README.md",
-    "dependencies": {
-        "mocha": "~1.14.0"
-    }
+    "dependencies": {}
 }
