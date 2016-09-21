@@ -85,6 +85,7 @@ describe('lru-cache-js', function () {
      *
      */
     describe('Performance test', function () {
+        this.timeout(0);
 
         it('should run without error', function () {
 
