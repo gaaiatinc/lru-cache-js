@@ -88,6 +88,13 @@ describe("lru-cache-js", function() {
 
             console.log("numOfEvictions = " + numOfEvictions);
             assert.equal(testMap.size(), (cache_capacity - 1), "end cache size verification!");
+
+            console.log("before clear, cache size = ", testMap.size());
+            console.log("before clear, numOfEvictions = " + numOfEvictions);
+            testMap.clear();
+            console.log("after clear, cache size = ", testMap.size());
+            console.log("after clear, numOfEvictions = " + numOfEvictions);
+            assert.equal(testMap.size(), (0), "after clear cache size verification!");
         });
     });
 });
