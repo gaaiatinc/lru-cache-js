@@ -1,12 +1,22 @@
-#lru-cache-js
+# lru-cache-js
 
-A JavaScript implementation of an LRU cache.  The cache is a hashmap of key-value pairs, where the key object must
-implement hashCode() and equals() methods.
+A JavaScript implementation of an LRU cache.  The cache is a hashmap of key-value pairs, where the key object may provide custom implementation of hashCode() and equals() methods.
 
 ## Interface
-lru-cache-js node module exports a function which is used to create an LRU cache.  The exported function takes a
-single mandatory argument that indicates the maximum capacity of the lru cache, and returns an instance of an lru cache.
-The returned lru cache implements  the following interface:
+lru-cache-js node module exports a class implementing an LRU cache.  The class constructor takes two optional arguments:
+
+```js
+let LRUCache = require("lru-cache-js");
+let lruCachInstance = new LRUCache(maxSize, evictionCallback);
+```
+The optional constructor arguments are:
+* maxSize: (default 1000) the maximum size of the LRU cache.  When more objects are inserted into the LRU cache than _maxSize_, the least recently used object in the cache will be evicted.
+
+* evictionCallback: a function that will be called when the tail object in the cache (least recently used) is being evicted.  The evicted object is passed as an argument to the evictionCallback function.
+
+
+single mandatory argument that indicates the maximum capacity of the LRU cache.
+The LRU cache implements the following interface:
 
 ``` js
 /**
@@ -43,15 +53,14 @@ size()
 
 
 ## Key Requirements
-The key object used with the interface methods above must implement the following methods:
+If the key object passed to any of the LRU cache methods does not have its own member methods hashCode() and equals(), the LRUCache will wrap the key object with a class that implements the two necessary methods (hashCode() calculates a SHA1 hash of the key object using the _object-hash_ module).
+
+The key object used with the interface methods above may implement its own member methods for hashCode() and equals():
 * hashCode(): The implementation of this method must return a value which can be of any JavaScript type (numbers, strings, etc.).
  This method must guarantee that for two key objects with at least one different attribute, the returned hash codes are different.
 * equals(otherKey): The implementation of this method must satisfy the following conditions:
     * key1.equals(key2) returns the same value as key2.equals(key1), and
     * if key1.equals(key2) returns true, then key1.hashCode() returns the same value as key2.hashCode().
-
-If the key object requirements above are not satisfied, the interface methods will throw an error.
-
 
 ## Install
 To install the lru-cache-js module as a dependency for your node app, execute the following command in the top directory of your node project:
@@ -64,6 +73,8 @@ npm install lru-cache-js --save
 To use lru-cache-js, follow this simple example:
 
 ```js
+"use strict";
+
 /**
  * require the module in your app:
  */

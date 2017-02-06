@@ -3,130 +3,91 @@
  * Created by aismael on 11/12/13.
  */
 
-'use strict';
+"use strict";
 
-var LRUCache = require('../lib/lru_cache');
+let LRUCache = require("../lib/LRUCache");
 
-var assert = require('assert');
-
-/**
- *
- * @param keyObj
- * @constructor
- */
-var TestKey = function (keyObj) {
-    this.keyObj = keyObj;
-};
-
-/**
- *
- * @returns {string}
- */
-TestKey.prototype.hashCode = function () {
-    return this.keyObj.toString();
-};
-
-/**
- *
- * @param anotherKey
- * @returns {boolean}
- */
-TestKey.prototype.equals = function (anotherKey) {
-    if (anotherKey && (typeof anotherKey.hashCode == 'function')) {
-        return this.hashCode() == anotherKey.hashCode();
-    } else {
-        return false;
-    }
-};
+let assert = require("assert");
 
 
 /**
  *
  */
-describe('lru-cache-js', function () {
+describe("lru-cache-js", function() {
 
-    var testMap;
-    var cache_capacity = 100000;
-    var numOfEvictions = 0;
+    let testMap;
+    let cache_capacity = 100000;
+    let numOfEvictions = 0;
 
     function evictionNotify(evicted) {
         numOfEvictions++;
     }
 
-    before(function () {
+    before(function() {
         //
-        testMap = LRUCache(cache_capacity, evictionNotify);
-    });
-
-
-    /**
-     *
-     */
-    after(function () {
-
+        testMap = new LRUCache(cache_capacity, evictionNotify);
     });
 
     /**
      *
      */
-    beforeEach(function () {
-
-    });
+    after(function() {});
 
     /**
      *
      */
-    afterEach(function () {
-
-    });
-
+    beforeEach(function() {});
 
     /**
      *
      */
-    describe('Performance test', function () {
+    afterEach(function() {});
+
+    /**
+     *
+     */
+    describe("Performance test", function() {
         this.timeout(0);
 
-        it('should run without error', function () {
+        it("should run without error", function() {
 
-            var num_of_tests = 1000000;
+            let num_of_tests = 1000000;
 
-            var testObj = 'this is a test key number ';
+            let testObj = "this is a test key number ";
 
-            var startTime = new Date().getTime();
+            let startTime = new Date().getTime();
 
-            var testKey;
+            let testKey;
 
-            for (var i = 0; i < num_of_tests; i++) {
-                testKey = new TestKey(testObj + i);
+            for (let i = 0; i < num_of_tests; i++) {
+                testKey = (testObj + i);
                 testMap.put(testKey, testObj + i);
 
                 if ((i % 100) == 0) {
-                    testKey = new TestKey(testObj + 99);
+                    testKey = (testObj + 99);
                     testMap.get(testKey);
                 }
             }
 
-            assert.equal(testMap.size(), cache_capacity, 'max cache capacity verification');
+            assert.equal(testMap.size(), cache_capacity, "max cache capacity verification");
 
-
-            testKey = new TestKey(testObj + 999990);
-            assert.equal(testObj + 999990, testMap.get(testKey), 'verification of object retrieval after stress test');
+            testKey = (testObj + 999990);
+            assert.equal(testObj + 999990, testMap.get(testKey), "verification of object retrieval after stress test");
 
             testMap.put(testKey, testObj + 224);
-            assert.equal(testMap.get(testKey), testObj + 224, 'second verificaiton object retrieval after stress test');
+            assert.equal(testMap.get(testKey), testObj + 224, "second verificaiton object retrieval after stress test");
 
-            testKey = new TestKey(testObj + 223);
-            assert.equal(testMap.get(testKey), null, 'verificaiton of old object eviction upon cache capacity exhaustion.');
+            testKey = (testObj + 223);
+            assert.equal(testMap.get(testKey), null, "verificaiton of old object eviction upon cache capacity exhaustion.");
 
-            testKey = new TestKey(testObj + 99);
-            assert.equal(testMap.get(testKey), testObj + 99, 'verification of LRU functionality');
+            testKey = (testObj + 99);
+            assert.equal(testMap.get(testKey), testObj + 99, "verification of LRU functionality");
 
             testMap.remove(testKey);
-            console.log('tests performed in ' + (new Date().getTime() - startTime) + " ms");
+            console.log("tests performed in " + (new Date().getTime() - startTime) + " ms");
 
-            console.log('numOfEvictions = ' + numOfEvictions);
-            assert.equal(testMap.size(), (cache_capacity - 1), 'end cache size verification!');
+            console.log("numOfEvictions = " + numOfEvictions);
+            assert.equal(testMap.size(), (cache_capacity - 1), "end cache size verification!");
         });
     });
 });
